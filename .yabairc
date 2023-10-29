@@ -1,31 +1,21 @@
-
 #!/usr/bin/env sh
 
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
 # bar settings
-yabai -m config status_bar                   on
-yabai -m config status_bar_text_font         "Helvetica Neue:Bold:12.0"
-yabai -m config status_bar_icon_font         "feather:Regular:12.0"
-# yabai -m config status_bar_icon_font         "Font Awesome 5 Free:Solid:12"
-yabai -m config status_bar_background_color  0xff202020
-yabai -m config status_bar_foreground_color  0xffa8a8a8
-# yabai -m config status_bar_space_icon_strip  I II III IV V VI VII VIII IX X
-# yabai -m config status_bar_space_icon_strip       VI VII VIII IX X
-yabai -m config status_bar_space_icon_strip  1 2 3 4 5 6 7 8 9 10
-yabai -m config status_bar_power_icon_strip   
-# yabai -m config status_bar_power_icon_strip   
-yabai -m config status_bar_space_icon        
-yabai -m config status_bar_clock_icon        
-# yabai -m config status_bar_clock_icon        
+yabai -m config external_bar main:20:0
 
 # global settings
-yabai -m config mouse_follows_focus          on
+yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on
-yabai -m config window_border                on
+yabai -m config window_border                off
 yabai -m config window_border_width          3
 # yabai -m config active_window_border_color   0xff775759
 yabai -m config active_window_border_color   0xff464159
@@ -64,32 +54,10 @@ yabai -m signal --add event=space_changed action="~/Programs/bin/toggle"
 # updates every 5 minutes
 frequency=300
 
-function update_battery_loop() {
-	while true; do
-		# Get the current battery percentage.
-		battery=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
+# rules
 
-		if [ $battery -gt 84 ]; then
-			yabai -m config status_bar_power_icon_strip battery-full plug
-		elif [ $battery -gt 60 ]; then
-			yabai -m config status_bar_power_icon_strip battery-three-quarters plug
-		elif [ $battery -gt 39 ]; then
-			yabai -m config status_bar_power_icon_strip battery-half plug
-		elif [ $battery -gt 14 ]; then
-			yabai -m config status_bar_power_icon_strip battery-quarter plug
-		else
-			yabai -m config status_bar_power_icon_strip battery-empty plug
-		fi
-
-		sleep $frequency
-	done
-}
-
-# TODO: make icons for battery percentage
-# run the function async
-# update_battery_loop &
-
-# maintain state while updating icon
-~/Programs/bin/toggle
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Discord$" manage=off
+yabai -m rule --add app="^Raycast" manage=off
 
 echo "yabai configuration loaded.."
