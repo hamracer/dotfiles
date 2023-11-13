@@ -1,11 +1,3 @@
 # dotfiles
 
-Programs that will need to be redownloaded
-
-Parallels Desktop + Win10 Image  
-Loopback  
-Kitty  
-ZSH  
-ATOM  
-yabai  
-shdc
+Current dotfiles for work m2 mbp
