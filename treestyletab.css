@@ -16,7 +16,7 @@
     /* Hide .twisty and adjust margins so favicons have 7px on left. */
     .tab .twisty {
     	visibility: hidden;
-    	margin-left: -10px;
+    	margin-left: -5px;
     }
      
     /* Push tab labels slightly to the right so they're completely hidden in collapsed state */
