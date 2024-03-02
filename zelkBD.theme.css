@@ -26,7 +26,7 @@
 /*-------------VARIABLES-------------*/
 :root {
   /* set to 'unset' to show */
-  --scrollbars: none;
+  
   /* user notes */
   --notes: none;
   /* direct message box */
@@ -47,9 +47,9 @@
 }
 
 
-/*  */
+/*hover slideout for userlist*/
 .container_b2ce9c {
-  --hover-animation-speed: .35s;
+  --hover-animation-speed: .35s;https://www.26cellu.com/startpage
   display:flex;
   flex-direction:column;
   background:var(--bg-overlay-chat,var(--background-secondary));
@@ -74,9 +74,18 @@
   --text-1: #d7d7d7;
   --text-2: #7A7A7A;
   --text-link: #edf8fe;
+
+  --profile-body-background-color: var(--background-1);
+  --brand-experiment-560:var(--background-2);
+  --brand-experiment-600:var(--background-accent);
+  /* --status-danger:  */
 }
 /*-------------ADVANCED--------------*/
+
+
 .theme-dark {
+
+  --copythishaha: var(--check);
   /* background */
   --background-primary: var(--background-1);
   --background-primary-alt: var(--background-1);
