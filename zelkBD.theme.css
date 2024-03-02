@@ -49,17 +49,22 @@
 
 /*hover slideout for userlist*/
 .container_b2ce9c {
-  --hover-animation-speed: .35s;https://www.26cellu.com/startpage
+  --hover-animation-speed: .35s;
   display:flex;
   flex-direction:column;
   background:var(--bg-overlay-chat,var(--background-secondary));
   height:100%;
-  transition: all var(--hover-animation-speed);
+  transition: flex var(--hover-animation-speed) linear;
+  flex-shrink: 0.35;
   width: 60px;
 }
+
 .container_b2ce9c:hover {
-  flex-grow: 0.38;
+  max-width: 240px;
+  flex-grow: 0.3;
 }
+
+
 
 /*-----------CUSTOM COLORS-----------*/
 /*-------------DARK MODE-------------*/
@@ -78,6 +83,7 @@
   --profile-body-background-color: var(--background-1);
   --brand-experiment-560:var(--background-2);
   --brand-experiment-600:var(--background-accent);
+  --brand-experiment: var(--accent-color) !important;
   /* --status-danger:  */
 }
 /*-------------ADVANCED--------------*/
@@ -119,7 +125,7 @@
   --tab-selected: #354249;
   --switch: #3d4c53;
   --activity-card-background: var(--background-1);
-  --brand-experiment: var(--accent-color) !important;
+  
   /* buttons */
   --button-background: #2a3439;
   --button-background-hover: #354249;
