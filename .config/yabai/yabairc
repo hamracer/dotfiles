@@ -1,22 +1,18 @@
 #!/usr/bin/env sh
 
-
-sudo yabai --load-sa
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
-# bar settings
-yabai -m config external_bar main:20:0
+#sip disabled workaround for switching
+index=3; eval "$(yabai -m query --spaces | jq --argjson index "${index}" -r '(.[] | select(.index == $index).windows[0]) as $wid | if $wid then "yabai -m window --focus \"" + ($wid | tostring) + "\"" else "skhd --key \"ctrl - " + (map(select(."is-native-fullscreen" == false)) | index(map(select(.index == $index))) + 1 % 10 | tostring) + "\"" end')"
 
 # global settings
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
+yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
-yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
-yabai -m config window_shadow                on
+yabai -m config window_opacity               on
+yabai -m config window_shadow                off
 yabai -m config window_border                off
-yabai -m config window_border_width          3
+yabai -m config window_border_width          1
 # yabai -m config active_window_border_color   0xff775759
 yabai -m config active_window_border_color   0xff464159
 yabai -m config normal_window_border_color   0xff505050
@@ -30,34 +26,27 @@ yabai -m config mouse_modifier               alt
 yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 
+
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  20
+yabai -m config top_padding                  0
 yabai -m config bottom_padding               20
 yabai -m config left_padding                 20
 yabai -m config right_padding                20
-yabai -m config window_gap                   10
+yabai -m config window_gap                   20
 
-# Signals
-# Enable i3-gaps style "smart" gaps and borders
-# It only makes sense to have gaps/borders if there are > 1 windows in a space
-yabai -m signal --add event=window_created action="~/Programs/bin/smart_yabai inc"
-yabai -m signal --add event=window_destroyed action="~/Programs/bin/smart_yabai dec"
-yabai -m signal --add event=space_changed action="~/Programs/bin/smart_yabai"
-
-# switch focus on a closed window
-yabai -m signal --add event=window_destroyed action="~/Programs/bin/focus_yabai"
-
-# update icons
-yabai -m signal --add event=space_changed action="~/Programs/bin/toggle"
+# bar settings
+yabai -m config external_bar                 main:0:0
+yabai -m config external_bar                 all:20:0
 
 # updates every 5 minutes
 frequency=300
 
 # rules
-
-yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Discord$" manage=off
 yabai -m rule --add app="^Raycast" manage=off
+yabai -m rule --add app="^Seashore" manage=off
 
 echo "yabai configuration loaded.."
+
